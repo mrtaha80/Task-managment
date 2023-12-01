@@ -1,0 +1,14 @@
+<!-- templates/managment/create_task.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Create Task</h1>
+
+  <form method="POST">
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+
+{% endblock %}

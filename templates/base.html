@@ -1,0 +1,64 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}T$K{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-bottom: 100px; /* افزودن پدینگ به انتهای صفحه برای جا دادن فوتر */
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">T$K</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item {% block nav_tasks_active %}{% endblock %}">
+                    <a class="nav-link" href="{% url 'task_list' %}">Tasks</a>
+                </li>
+                <li class="nav-item {% block nav_create_task_active %}{% endblock %}">
+                    <a class="nav-link" href="{% url 'create_task' %}">Create Task</a>
+                </li>
+                <li class="nav-item {% block nav_profile_active %}{% endblock %}">
+                    <a class="nav-link" href="{% url 'user_profile' %}">Profile</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="footer">
+        <div class="container text-center">
+            <span class="text-muted">This website is the property of Tahā Khodāyāri, Mohammad Sāheli, and Alireza Mahdizādeh Shālmāyi. Any unauthorized reproduction or copying will be subject to legal action.</span>
+        </div>
+    </footer>
+</body>
+</html>

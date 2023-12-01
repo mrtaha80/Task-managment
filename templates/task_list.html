@@ -1,0 +1,42 @@
+<!-- templates/task_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block nav_tasks_active %}active{% endblock %}
+
+{% block content %}
+    <h1>Task List</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>{{ task.deadline }}</td>
+                    <td>
+                        <a href="{% url 'edit_task' task.id %}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No tasks found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'create_task' %}" class="btn btn-success">Create New Task</a>
+{% endblock %}

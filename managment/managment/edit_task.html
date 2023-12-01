@@ -1,0 +1,14 @@
+<!-- templates/managment/edit_task.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Edit Task</h1>
+
+  <form method="POST">
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+
+{% endblock %}

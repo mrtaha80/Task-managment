@@ -1,0 +1,46 @@
+<!-- edit_task.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1>Edit Task</h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_title">Title:</label>
+                        <input type="text" class="form-control" id="id_title" name="title" value="{{ task.title }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_description">Description:</label>
+                        <textarea class="form-control" id="id_description" name="description">{{ task.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_priority">Priority:</label>
+                        <select class="form-control" id="id_priority" name="priority">
+                            <option value="Low" {% if task.priority == 'Low' %}selected{% endif %}>Low</option>
+                            <option value="Medium" {% if task.priority == 'Medium' %}selected{% endif %}>Medium</option>
+                            <option value="High" {% if task.priority == 'High' %}selected{% endif %}>High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_status">Status:</label>
+                        <select class="form-control" id="id_status" name="status">
+                            <option value="Todo" {% if task.status == 'Todo' %}selected{% endif %}>Todo</option>
+                            <option value="In Progress" {% if task.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Done" {% if task.status == 'Done' %}selected{% endif %}>Done</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_deadline">Deadline:</label>
+                        <input type="date" class="form-control" id="id_deadline" name="deadline" value="{{ task.deadline }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

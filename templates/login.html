@@ -1,0 +1,39 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username:</label>
+                        <input type="text" class="form-control" id="id_username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password:</label>
+                        <input type="password" class="form-control" id="id_password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+
+                {% if lists %}
+                    <h2>Lists:</h2>
+                    <ul>
+                        {% for list in lists %}
+                            <li>{{ list.name }}</li>
+                        {% endfor %}
+                    </ul>
+
+                {% endif %}
+
+                
+                <p>If you don't have an account, click <a href="{% url 'register' %}">here</a> to register.</p>
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}

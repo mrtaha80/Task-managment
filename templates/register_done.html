@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Register Done</h1> <p>Welcome {{ user.username }}! You have successfully registered.</p> <p>Your details:</p> <ul> <li>Username: {{ user.username }}</li> <li>Name: {{ user.first_name }} {{ user.last_name }}</li> <li>Email: {{ user.email }}</li> </ul>
+    <a href="{% url 'task_list' %}" class="btn btn-primary">tasks</a>
+
+{% endblock %}
