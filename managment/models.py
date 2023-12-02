@@ -22,6 +22,7 @@ class Task(models.Model):
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     deadline = models.DateField()
+    image = models.ImageField(upload_to='task_images', blank=True, null=True)
 
     def __str__(self):
         return self.title
