@@ -1,5 +1,5 @@
 from .forms import TaskForm, UserProfileForm, LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm,CommentForm
-from .models import Task, UserProfile, Profile, Comment
+from .models import Task, UserProfile, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
