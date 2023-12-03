@@ -4,26 +4,35 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 
 def home(request):
-    tasks = Task.objects.all().select_related('user')  # با استفاده از select_related به صورت پیش‌فرض فیلد user را هم لود کنید
+    tasks = Task.objects.all().select_related('user')  
     return render(request, 'home.html', {'tasks': tasks})
 
 
 @login_required(login_url='login')  
 def task_list(request):
-    tasks = Task.objects.filter(user=request.user)  # فقط وظایف مربوط به کاربر فعلی را برگردانید
+    tasks = Task.objects.filter(user=request.user)  
     return render(request, 'task_list.html', {'tasks': tasks}) 
 
 @login_required(login_url='login')
 def create_task(request):
     form = TaskForm()
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, request.FILES)  # اضافه کردن request.FILES
         if form.is_valid():
             task = form.save(commit=False)
-            task.user = request.user  # تنظیم کاربر فعلی برای وظیفه
+            task.user = request.user
+
+ 
+            image = form.cleaned_data.get('image')
+            if image:
+                image_extension = image.name.split('.')[-1].lower()
+                if image_extension not in ['jpg', 'jpeg', 'png']:
+                    raise ValidationError("Invalid image format. Only JPG, JPEG, and PNG are allowed.")
+
             task.save()
             return redirect('task_list')
     return render(request, 'create_task.html', {'form': form})
@@ -36,8 +45,15 @@ def edit_task(request, task_id):
 
     form = TaskForm(instance=task)
     if request.method == 'POST':
-        form = TaskForm(request.POST, instance=task)
+        form = TaskForm(request.POST, request.FILES, instance=task)  # اضافه کردن request.FILES
         if form.is_valid():
+            # بررسی نوع فایل تصویر
+            image = form.cleaned_data.get('image')
+            if image:
+                image_extension = image.name.split('.')[-1].lower()
+                if image_extension not in ['jpg', 'jpeg', 'png']:
+                    raise ValidationError("Invalid image format. Only JPG, JPEG, and PNG are allowed.")
+
             form.save()
             return redirect('task_list')
     return render(request, 'edit_task.html', {'form': form, 'task': task})
@@ -55,7 +71,7 @@ def delete_task(request, task_id):
 
 @login_required(login_url='login')
 def user_profile(request):
-    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+    user_profile= UserProfile.objects.get_or_create(user=request.user)
     form = UserProfileForm(instance=user_profile)
     
     if request.method == 'POST':

@@ -1,4 +1,4 @@
-<!-- templates/task_list.html -->
+<!-- task_list.html -->
 {% extends 'base.html' %}
 
 {% block title %}Task List{% endblock %}
@@ -15,6 +15,7 @@
                 <th>Priority</th>
                 <th>Status</th>
                 <th>Deadline</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,13 +28,20 @@
                     <td>{{ task.status }}</td>
                     <td>{{ task.deadline }}</td>
                     <td>
+                        {% if task.image %}
+                            <img src="/media/{{ task.image }}" alt="Task Image" width="100">
+                        {% else %}
+                            No image available
+                        {% endif %}
+                    </td>
+                    <td>
                         <a href="{% url 'edit_task' task.id %}" class="btn btn-primary btn-sm">Edit</a>
                         <a href="{% url 'delete_task' task.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="6">No tasks found.</td>
+                    <td colspan="7">No tasks found.</td>
                 </tr>
             {% endfor %}
         </tbody>

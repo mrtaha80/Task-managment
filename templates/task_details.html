@@ -1,4 +1,3 @@
-<!-- task_details.html -->
 {% extends 'base.html' %}
 
 {% block title %}Task Detail{% endblock %}
@@ -56,6 +55,12 @@
                         <p class="card-text">Status: {{ task.status }}</p>
                         <p class="card-text">Deadline: {{ task.deadline }}</p>
 
+                        {% if task.image %}
+                            <img src="{{ task.image.url }}" alt="Task Image" width="100">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+
                         {% if request.user == task.user %}
                             <div class="mt-4">
                                 <a class="btn btn-edit" href="{% url 'edit_task' task.id %}">Edit</a>
@@ -91,4 +96,3 @@
         </div>
     </div>
 {% endblock %}
-پ

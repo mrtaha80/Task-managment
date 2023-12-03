@@ -1,4 +1,3 @@
-<!-- home.html -->
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
@@ -6,24 +5,31 @@
 {% block nav_home_active %}active{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h1>Tasks</h1>
-                {% for task in tasks %}
-                    <div class="card my-4">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ task.title }}</h3>
-                            <p class="card-text">User: {{ task.user.username }}</p>
-                            <p class="card-text">{{ task.description }}</p>
-                            <p class="card-text">Deadline: {{ task.deadline }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Tasks</h1>
+            {% for task in tasks %}
+                <div class="card my-4">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ task.title }}</h3>
+                        <p class="card-text">User: {{ task.user.username }}</p>
+                        <p class="card-text">{{ task.description }}</p>
+                        <p class="card-text">Deadline: {{ task.deadline }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if task.image %}
+                                <img src="{{ task.image.url }}" alt="Task Image" width="100">
+                            {% else %}
+                                <p>No image available</p>
+                            {% endif %}
                             <a class="btn btn-primary" href="{% url 'task_details' task.id %}">Details</a>
                         </div>
                     </div>
-                {% empty %}
-                    <p>No tasks found.</p>
-                {% endfor %}
-            </div>
+                </div>
+            {% empty %}
+                <p>No tasks found.</p>
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock %}

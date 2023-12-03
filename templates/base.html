@@ -2,13 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}T$K{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>{% block title %}Task Management{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            padding-bottom: 100px; /* افزودن پدینگ به انتهای صفحه برای جا دادن فوتر */
+            padding-bottom: 100px;
         }
         .footer {
             position: fixed;
@@ -19,12 +17,75 @@
             text-align: center;
             padding: 10px 0;
         }
+        .task-card {
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        .task-card .task-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .task-card .task-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .task-card .task-assignee {
+            font-size: 14px;
+            color: #888;
+        }
+        .task-card .task-status {
+            font-size: 14px;
+            color: #888;
+        }
+        .create-task-form {
+            margin-top: 20px;
+        }
+        .create-task-form .form-group {
+            margin-bottom: 20px;
+        }
+        .create-task-form .form-group label {
+            font-weight: bold;
+        }
+        .create-task-form .form-group input[type="text"],
+        .create-task-form .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .create-task-form .form-group .btn-primary {
+            padding: 8px 16px;
+        }
+        .profile-card {
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        .profile-card .profile-name {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .profile-card .profile-email {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .profile-card .profile-username {
+            font-size: 14px;
+            color: #888;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">T$K</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        <a class="navbar-brand" href="/">Task Management</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,12 +101,12 @@
                     <a class="nav-link" href="{% url 'user_profile' %}">Profile</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'register' %}">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link"href="{% url 'logout' %}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -60,5 +121,8 @@
             <span class="text-muted">This website is the property of Tahā Khodāyāri, Mohammad Sāheli, and Alireza Mahdizādeh Shālmāyi. Any unauthorized reproduction or copying will be subject to legal action.</span>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

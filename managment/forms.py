@@ -1,17 +1,17 @@
 from django import forms
-from .models import Task, UserProfile, Profile, Comment
+from .models import Task, UserProfile, Comment
 from django.contrib.auth.models import User
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        exclude = ('user',)  # حذف فیلد 'user' از فرم
+        exclude = ('user',)  
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        exclude = ('user',)  # حذف فیلد 'user' از فرم
-
+        exclude = ('user',)  
+        
 class LoginForm(forms.Form):
     username = forms.CharField(label='نام کاربری')
     password = forms.CharField(label='رمز عبور', widget=forms.PasswordInput)
@@ -33,12 +33,12 @@ class UserRegistrationForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email',)
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        exclude = ('user',)  # حذف فیلد 'user' از فرم
+        model = UserProfile
+        exclude = ('user',) 
         
 class CommentForm(forms.ModelForm):
     class Meta:

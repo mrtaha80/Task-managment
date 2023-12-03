@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h1>Create Task</h1>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="id_title">Title:</label>
@@ -39,6 +39,10 @@
                     <div class="form-group">
                         <label for="id_deadline">Deadline:</label>
                         <input type="date" class="form-control" id="id_deadline" name="deadline">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_image">Image:</label>
+                        <input type="file" class="form-control" id="id_image" name="image">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
