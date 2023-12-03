@@ -16,7 +16,7 @@ class Task(models.Model):
         ('Done', 'Done'),
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # ارتباط با کاربر
+    user = models.ForeignKey(User, on_delete=models.CASCADE) 
     title = models.CharField(max_length=100)
     description = models.TextField()
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES)
