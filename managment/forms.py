@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task, UserProfile, Comment
+from .models import Task, UserProfile, Comment, Profile
 from django.contrib.auth.models import User
 
 class TaskForm(forms.ModelForm):
@@ -37,7 +37,7 @@ class UserEditForm(forms.ModelForm):
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         exclude = ('user',) 
         
 class CommentForm(forms.ModelForm):

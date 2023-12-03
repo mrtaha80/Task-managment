@@ -36,6 +36,10 @@ class Comment(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(default='')
 
     def __str__(self):

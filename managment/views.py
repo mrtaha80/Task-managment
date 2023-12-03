@@ -1,5 +1,5 @@
 from .forms import TaskForm, UserProfileForm, LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm,CommentForm
-from .models import Task, UserProfile, Comment
+from .models import Task, UserProfile,Profile, Comment
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -71,7 +71,7 @@ def delete_task(request, task_id):
 
 @login_required(login_url='login')
 def user_profile(request):
-    user_profile= UserProfile.objects.get_or_create(user=request.user)
+    user_profile, created= Profile.objects.get_or_create(user=request.user)
     form = UserProfileForm(instance=user_profile)
     
     if request.method == 'POST':
