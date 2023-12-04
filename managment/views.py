@@ -21,7 +21,7 @@ def task_list(request):
 def create_task(request):
     form = TaskForm()
     if request.method == 'POST':
-        form = TaskForm(request.POST, request.FILES)  # اضافه کردن request.FILES
+        form = TaskForm(request.POST, request.FILES)  
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
