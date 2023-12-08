@@ -21,7 +21,7 @@ def task_list(request):
 def create_task(request):
     form = TaskForm()
     if request.method == 'POST':
-        form = TaskForm(request.POST, request.FILES)  # اضافه کردن request.FILES
+        form = TaskForm(request.POST, request.FILES)
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -40,12 +40,12 @@ def create_task(request):
 @login_required(login_url='login')
 def edit_task(request, task_id):
     task = Task.objects.get(id=task_id)
-    if task.user != request.user:  # بررسی اینکه آیا وظیفه متعلق به کاربر فعلی است یا خیر
+    if task.user != request.user: 
         return redirect('task_list')
 
     form = TaskForm(instance=task)
     if request.method == 'POST':
-        form = TaskForm(request.POST, request.FILES, instance=task)  # اضافه کردن request.FILES
+        form = TaskForm(request.POST, request.FILES, instance=task) 
         if form.is_valid():
             # بررسی نوع فایل تصویر
             image = form.cleaned_data.get('image')
@@ -61,7 +61,7 @@ def edit_task(request, task_id):
 @login_required(login_url='login')
 def delete_task(request, task_id):
     task = Task.objects.get(id=task_id)
-    if task.user != request.user:  # بررسی اینکه آیا وظیفه متعلق به کاربر فعلی است یا خیر
+    if task.user != request.user: 
         return redirect('task_list')
 
     if request.method == 'POST':
@@ -103,8 +103,8 @@ def login_view(request):
                 return render(request, 'login.html', {'form': form, 'error_message': error_message})
     else:
         form = LoginForm()
-    
-    # If login fails, suggest redirecting to the registration page
+
+
     register_redirect = 'register'
     
     return render(request, 'login.html', {'form': form, 'register_redirect': register_redirect})
@@ -162,7 +162,7 @@ def task_detail(request, task_id):
     else:
         comment_form = CommentForm()
         
-    # بررسی اینکه آیا وظیفه متعلق به کاربر فعلی است یا خیر
+
     is_user_task = False
     if task.user == request.user:
         is_user_task = True
